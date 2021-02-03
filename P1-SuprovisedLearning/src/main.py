@@ -9,24 +9,24 @@ from sklearn.compose import ColumnTransformer
 from algorithms.decisionTrees import decisionTreeClassifier 
 from algorithms.neuralNet import neuralNet 
 from algorithms.supportVectorMachines import svm 
+from algorithms.boosting import boosting 
+from algorithms.kNearestNeighbor import knn 
 
 
 def main():
     x, y = transformCreditData()
-    trainingDataX =  x[::int(len(x)*.75)]
-    trainingDataY =  y[::int(len(y)*.75)]
-    testingDataX =  x[int(len(x)*.75)::]
-    testingDataY =  y[int(len(y)*.75)::]
-
-
+    split=int(len(x)*.9)
+    trainingDataX =  x.iloc[:split]
+    trainingDataY =  y.iloc[:split]
+    testingDataX =  x.iloc[split:]
+    testingDataY =  y.iloc[split:]
+    
+    #algorithm
     decisionTreeClassifier(trainingDataX,trainingDataY, testingDataX, testingDataY)
     neuralNet(trainingDataX,trainingDataY, testingDataX, testingDataY)
     svm(trainingDataX,trainingDataY, testingDataX, testingDataY)
-
-    # algos=['']
-    # for algo in algos:
-    #     trainAlgo(algo, trainingData)
-    #     testAlgo(algo, testingData)
+    boosting(trainingDataX,trainingDataY, testingDataX, testingDataY)
+    knn(trainingDataX,trainingDataY, testingDataX, testingDataY)
 
 def transformCreditData(): 
     le = LabelEncoder() 
@@ -47,10 +47,7 @@ def transformCreditData():
     x = data.filter(['Attrition_Flag','Customer_Age','Gender','Dependent_count','Education_Level','Marital_Status','Card_Category'], axis=1)        
     #x= np.array(columnTransformer.fit_transform(x), dtype = np.str) 
     y = data['Credit_Limit']
-    y=y/10
     y=y.round()
-    y=y*10
-   
     return x,y
 
 #credit data 

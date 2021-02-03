@@ -8,6 +8,5 @@ Download Python3 and pip3
 To install all dependancies run the following command from the root of this directory
     - 'pip3 install -r requirements.txt'
 
-To see the data for this project go to the following url: 
-    -''
+
 
