@@ -40,7 +40,7 @@ def transformCreditData():
 
 
 def decisionTreeClassifier(x,y):
-    clf = tree.DecisionTreeClassifier(random_state=10, max_depth=3)
+    clf = tree.DecisionTreeRegressor(random_state=10, max_depth=3)
     scores = cross_val_score(clf, x, y, cv=5)
     #scoring = {'prec_macro': 'precision_macro', 'rec_macro': make_scorer(recall_score, average='macro')}
     #scores = cross_validate(clf, x, y, scoring=scoring, cv=5, return_train_score=True)
