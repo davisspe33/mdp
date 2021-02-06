@@ -8,5 +8,9 @@ Download Python3 and pip3
 To install all dependancies run the following command from the root of this directory
     - 'pip3 install -r requirements.txt'
 
+To run the algortithms on the housing data run the follwoing command
+    -  'python3 housingData/`selectedAlgo`.py'
+    - where selectedAlgo is the algorithm you want to run
+
 
 

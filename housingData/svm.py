@@ -2,9 +2,6 @@
 import csv
 import numpy as np 
 import pandas as pd 
-from sklearn.preprocessing import LabelEncoder 
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.compose import ColumnTransformer 
 from sklearn.model_selection import cross_val_score
 from sklearn.svm import SVR
 from sklearn.preprocessing import StandardScaler

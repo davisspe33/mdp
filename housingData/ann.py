@@ -2,14 +2,7 @@
 import csv
 import numpy as np 
 import pandas as pd 
-from sklearn.preprocessing import LabelEncoder 
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.compose import ColumnTransformer 
 from sklearn.model_selection import cross_val_score
-from sklearn import tree
-from sklearn.model_selection import cross_validate
-from sklearn.metrics import recall_score
-from sklearn.metrics import make_scorer
 from sklearn.neural_network import MLPRegressor
 
 def main():
