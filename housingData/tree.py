@@ -13,7 +13,7 @@ from sklearn.metrics import make_scorer
 
 def main():
     x, y = transformCreditData()
-    decisionTreeClassifier(x,y)
+    decisionTreeRegressor(x,y)
 
 def transformCreditData(): 
     data = pd.read_csv('HousingData.csv') 
@@ -23,8 +23,7 @@ def transformCreditData():
     y = data['MEDV']
     return x,y
 
-
-def decisionTreeClassifier(x,y):
+def decisionTreeRegressor(x,y):
     clf = tree.DecisionTreeRegressor(random_state=0, max_depth=2)
     scores = cross_val_score(clf, x, y, cv=5)
     print(scores)

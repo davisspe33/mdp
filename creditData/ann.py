@@ -7,7 +7,7 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer 
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import cross_val_score
-from sklearn.neural_network import MLPClassifier
+from sklearn.neural_network import MLPRegressor
 from sklearn.model_selection import train_test_split
 
 
@@ -40,10 +40,8 @@ def transformCreditData():
 
 
 def neuralNet(x,y):
-    clf = MLPClassifier(solver='lbfgs', alpha=1e-5,hidden_layer_sizes=(5, 2), random_state=1)
-    X_train, X_test, y_train, y_test = train_test_split(x,y,test_size = .2, random_state = 0)
-    clf.fit(X_train,y_train)
-    res_pred = clf.predict(X_test)
-    score = accuracy_score(y_test, res_pred)
-    print(score)
+    clf = MLPRegressor(random_state=1, max_iter=500)
+    scores = cross_val_score(clf, x, y, cv=5)
+    print(scores)
+
 main()
