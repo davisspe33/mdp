@@ -12,6 +12,7 @@ from sklearn.model_selection import cross_val_score
 
 def decisionTreeClassifier(trainingDataX, TraingingDataY, testDataX, testDataY):
     clf = tree.DecisionTreeClassifier()
+    return clf
     clf = clf.fit(trainingDataX, TraingingDataY)
     testAlgo('dt', clf, testDataX, testDataY)
 

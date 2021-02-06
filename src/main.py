@@ -11,22 +11,29 @@ from algorithms.neuralNet import neuralNet
 from algorithms.supportVectorMachines import svm 
 from algorithms.boosting import boosting 
 from algorithms.kNearestNeighbor import knn 
+from sklearn.model_selection import cross_val_score
 
 
 def main():
     x, y = transformCreditData()
     split=int(len(x)*.9)
-    trainingDataX =  x.iloc[:split]
+    #trainingDataX =  x.iloc[:split]
+    trainingDataX = x[:split] #for numpy
     trainingDataY =  y.iloc[:split]
-    testingDataX =  x.iloc[split:]
+    #testingDataX =  x.iloc[split:]
+    testingDataX = x[split:]#for numpy
     testingDataY =  y.iloc[split:]
     
+    print(y)
     #algorithm
-    decisionTreeClassifier(trainingDataX,trainingDataY, testingDataX, testingDataY)
-    neuralNet(trainingDataX,trainingDataY, testingDataX, testingDataY)
-    svm(trainingDataX,trainingDataY, testingDataX, testingDataY)
-    boosting(trainingDataX,trainingDataY, testingDataX, testingDataY)
-    knn(trainingDataX,trainingDataY, testingDataX, testingDataY)
+    clf = decisionTreeClassifier(trainingDataX,trainingDataY, testingDataX, testingDataY)
+    scores = cross_val_score(clf, x, y, cv=5)
+    print(scores)
+    # neuralNet(trainingDataX,trainingDataY, testingDataX, testingDataY)
+    # # next 2 algos are broken
+    # svm(trainingDataX,trainingDataY, testingDataX, testingDataY)
+    # boosting(trainingDataX,trainingDataY, testingDataX, testingDataY)
+    # knn(trainingDataX,trainingDataY, testingDataX, testingDataY)
 
 def transformCreditData(): 
     le = LabelEncoder() 
@@ -38,16 +45,18 @@ def transformCreditData():
     data['Income_Category']= le.fit_transform(data['Income_Category']) 
     data['Card_Category']= le.fit_transform(data['Card_Category']) 
 
-    #commenting out One-hot-encoder
-    # columnTransformer = ColumnTransformer([('encoder', 
-    #                                     OneHotEncoder(), 
-    #                                     [0,2,4,5,6])], 
-    #                                   remainder='passthrough')
+    columnTransformer = ColumnTransformer([('encoder', 
+                                        OneHotEncoder(), 
+                                        [0,2,4,5,6])], 
+                                      remainder='passthrough')
   
     x = data.filter(['Attrition_Flag','Customer_Age','Gender','Dependent_count','Education_Level','Marital_Status','Card_Category'], axis=1)        
-    #x= np.array(columnTransformer.fit_transform(x), dtype = np.str) 
+    x= np.array(columnTransformer.fit_transform(x), dtype = np.str) 
     y = data['Credit_Limit']
+    y=y/10
     y=y.round()
+    y=y*10
+    y.to_numpy()
     return x,y
 
 #credit data 

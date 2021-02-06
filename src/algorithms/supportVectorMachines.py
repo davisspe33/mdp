@@ -8,6 +8,7 @@ from algorithms.testScript import testAlgo
 ## Add Cross validation 
 ## Add Graphing 
 
+#broken....
 def svm(trainingDataX, TraingingDataY, testDataX, testDataY):
     clf = make_pipeline(StandardScaler(), SVC(gamma='auto'))
     clf.fit(trainingDataX, TraingingDataY)
