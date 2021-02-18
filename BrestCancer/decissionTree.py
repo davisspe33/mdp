@@ -8,16 +8,16 @@ from sklearn.model_selection import validation_curve
 import matplotlib.pyplot as plt
 
 def main():
-    x, y = transformCreditData()
+    x, y = transformCancerData()
     decisionTreeRegressor(x,y)
     plotmodel(x,y)
 
-def transformCreditData(): 
-    data = pd.read_csv('HousingData.csv') 
-    data = data.fillna(0)
+def transformCancerData(): 
+    data = pd.read_csv('Cancerdata.csv') 
+    #data = data.fillna(0)
     x = data
-    x = x.drop(['MEDV'], axis=1)
-    y = data['MEDV']
+    x = x.drop(['diagnosis'], axis=1)
+    y = data['diagnosis']
     return x,y
 
 def decisionTreeRegressor(x,y):
@@ -25,6 +25,7 @@ def decisionTreeRegressor(x,y):
     scores = cross_val_score(clf, x, y, cv=5)
     print(scores)
     pruneIt(clf,x,y)
+
 
 def plotmodel(x,y):
     param_range= np.linspace(1, 10, num=10)
