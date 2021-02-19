@@ -12,5 +12,9 @@ To run the algortithms on the housing data run the follwoing command
     -  'python3 housingData/`selectedAlgo`.py'
     - where selectedAlgo is the algorithm you want to run
 
+To run the algortithms on the housing data run the follwoing command
+    - 'python3 housingData/`selectedAlgo`.py'
+    - where selectedAlgo is the algorithm you want to run
+
 
 

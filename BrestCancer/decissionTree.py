@@ -6,30 +6,32 @@ from sklearn.model_selection import cross_val_score
 from sklearn import tree
 from sklearn.model_selection import validation_curve
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import LabelEncoder 
 
 def main():
     x, y = transformCancerData()
-    decisionTreeRegressor(x,y)
+    decisionTreeClassifier(x,y)
     plotmodel(x,y)
+
 
 def transformCancerData(): 
     data = pd.read_csv('Cancerdata.csv') 
-    #data = data.fillna(0)
+    data = data.fillna(0)
     x = data
-    x = x.drop(['diagnosis'], axis=1)
-    y = data['diagnosis']
+    x = x.drop(['diagnosis','id'], axis=1)
+    le = LabelEncoder() 
+    y = le.fit_transform(data['diagnosis'])
     return x,y
 
-def decisionTreeRegressor(x,y):
-    clf = tree.DecisionTreeRegressor(random_state=0, max_depth=10)
+def decisionTreeClassifier(x,y):
+    clf = tree.DecisionTreeClassifier(random_state=0, max_depth=10)
     scores = cross_val_score(clf, x, y, cv=5)
     print(scores)
-    pruneIt(clf,x,y)
 
 
 def plotmodel(x,y):
     param_range= np.linspace(1, 10, num=10)
-    train_scores, test_scores = validation_curve(tree.DecisionTreeRegressor(random_state=0), x, y, param_name="max_depth", param_range=param_range, cv=5)
+    train_scores, test_scores = validation_curve(tree.DecisionTreeClassifier(random_state=0), x, y, param_name="max_depth", param_range=param_range, cv=5)
     train_scores_mean = np.mean(train_scores, axis=1)
     test_scores_mean = np.mean(test_scores, axis=1)
     lw = 2

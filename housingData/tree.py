@@ -21,13 +21,13 @@ def transformCreditData():
     return x,y
 
 def decisionTreeRegressor(x,y):
-    clf = tree.DecisionTreeRegressor(random_state=0, max_depth=10)
-    scores = cross_val_score(clf, x, y, cv=5)
+    clf = tree.DecisionTreeRegressor(random_state=0, max_depth=3)
+    #clf = tree.DecisionTreeRegressor()
+    scores = cross_val_score(clf, x, y, cv=5, verbose=1)
     print(scores)
-    pruneIt(clf,x,y)
 
 def plotmodel(x,y):
-    param_range= np.linspace(1, 10, num=10)
+    param_range= np.linspace(1, 20, num=20)
     train_scores, test_scores = validation_curve(tree.DecisionTreeRegressor(random_state=0), x, y, param_name="max_depth", param_range=param_range, cv=5)
     train_scores_mean = np.mean(train_scores, axis=1)
     test_scores_mean = np.mean(test_scores, axis=1)

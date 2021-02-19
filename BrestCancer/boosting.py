@@ -1,28 +1,43 @@
-
 import csv
 import numpy as np 
 import pandas as pd 
 from sklearn.model_selection import cross_val_score
-from sklearn import tree
-from sklearn.model_selection import cross_validate
-from sklearn.metrics import recall_score
-from sklearn.metrics import make_scorer
-from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.model_selection import validation_curve
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import LabelEncoder 
 
 def main():
-    x, y = transformCreditData()
+    x, y = transformCancerData()
     boosting(x,y)
+    plotmodel(x,y)
 
-def transformCreditData(): 
-    data = pd.read_csv('HousingData.csv') 
+def transformCancerData(): 
+    data = pd.read_csv('Cancerdata.csv') 
     data = data.fillna(0)
     x = data
-    x = x.drop(['MEDV'], axis=1)
-    y = data['MEDV']
+    x = x.drop(['diagnosis','id'], axis=1)
+    le = LabelEncoder() 
+    y = le.fit_transform(data['diagnosis'])
     return x,y
 
 def boosting(x,y):
-    clf = GradientBoostingRegressor(random_state=0)
-    scores = cross_val_score(clf, x, y, cv=5)
+    clf = GradientBoostingClassifier(random_state=0)
+    scores = cross_val_score(clf, x, y, cv=5, verbose=1)
     print(scores)
+
+def plotmodel(x,y):
+    param_range= np.linspace(2, 10, num=9)
+    param_range= param_range.astype('int')
+    train_scores, test_scores = validation_curve(GradientBoostingClassifier(), x, y, param_name="max_leaf_nodes", param_range=param_range, cv=5)
+    train_scores_mean = np.mean(train_scores, axis=1)
+    test_scores_mean = np.mean(test_scores, axis=1)
+    lw = 2
+    plt.plot(param_range, train_scores_mean, label="Training score",color="darkorange", lw=lw)
+    plt.plot(param_range, test_scores_mean, label="Cross-validation score",color="navy", lw=lw)
+    plt.xlabel('number of neighbors')
+    plt.ylabel('R squared accuracy')
+    plt.legend(loc="best")
+    plt.show()
+
 main()
