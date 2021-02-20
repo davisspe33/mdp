@@ -11,7 +11,7 @@ from sklearn.preprocessing import LabelEncoder
 def main():
     x, y = transformCancerData()
     knn(x,y)
-    plotmodel(x,y)
+    #plotmodel(x,y)
 
 def transformCancerData(): 
     data = pd.read_csv('Cancerdata.csv') 
@@ -23,12 +23,12 @@ def transformCancerData():
     return x,y
 
 def knn(x,y):
-    clf = KNeighborsClassifier(n_neighbors=5)
+    clf = KNeighborsClassifier(n_neighbors=14)
     scores = cross_val_score(clf, x, y, cv=5) #score is uniform average
     print(scores)
 
 def plotmodel(x,y):
-    param_range= np.linspace(1, 100, num=100)
+    param_range= np.linspace(1, 30, num=30)
     param_range= param_range.astype('int')
     train_scores, test_scores = validation_curve(KNeighborsClassifier(), x, y, param_name="n_neighbors", param_range=param_range, cv=5)
     train_scores_mean = np.mean(train_scores, axis=1)
