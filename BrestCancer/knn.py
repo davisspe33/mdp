@@ -13,7 +13,7 @@ def main():
     x, y = transformCancerData()
     knn(x,y)
     #plotmodel(x,y)
-    plotmodelLearn(x,y)
+    #plotmodelLearn(x,y)
 
 def transformCancerData(): 
     data = pd.read_csv('Cancerdata.csv') 
@@ -49,7 +49,7 @@ def plotmodelLearn(x,y):
     axes[0].set_ylabel("Score")
 
     train_sizes=np.linspace(.1, 1.0, 5)
-    train_sizes, train_scores, test_scores, fit_times, _ = learning_curve(SVR(kernel='linear'), x, y, train_sizes=train_sizes, return_times=True)
+    train_sizes, train_scores, test_scores, fit_times, _ = learning_curve(KNeighborsClassifier(n_neighbors=14), x, y, train_sizes=train_sizes, return_times=True)
     train_scores_mean = np.mean(train_scores, axis=1)
     train_scores_std = np.std(train_scores, axis=1)
     test_scores_mean = np.mean(test_scores, axis=1)

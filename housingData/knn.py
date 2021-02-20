@@ -9,12 +9,12 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import learning_curve
 
 def main():
-    x, y = transformCreditData()
+    x, y = transformData()
     knn(x,y)
     #plotmodel(x,y)
     #plotmodelLearn(x,y)
 
-def transformCreditData(): 
+def transformData(): 
     data = pd.read_csv('HousingData.csv') 
     data = data.fillna(0)
     x = data

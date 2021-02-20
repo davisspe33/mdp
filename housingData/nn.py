@@ -9,13 +9,13 @@ from sklearn.model_selection import validation_curve
 import matplotlib.pyplot as plt
 
 def main():
-    x, y = transformCreditData()
+    x, y = transformData()
     neuralNet(x,y)
     #plotmodelHidden(x,y)
     #plotmodelMaxIt(x,y)
     #plotmodelLearn(x,y)
 
-def transformCreditData(): 
+def transformData(): 
     data = pd.read_csv('HousingData.csv') 
     data = data.fillna(0)
     x = data
