@@ -12,9 +12,9 @@ To run the algortithms on the housing data run the follwoing command
     -  'python3 housingData/`selectedAlgo`.py'
     - where selectedAlgo is the algorithm you want to run
 
-To run the algortithms on the housing data run the follwoing command
-    - 'python3 housingData/`selectedAlgo`.py'
+To run the algortithms on the BreastCancer data run the follwoing command
+    - 'python3 BreastCancer/`selectedAlgo`.py'
     - where selectedAlgo is the algorithm you want to run
 
-
+To get the plots of the validation and learning curves used in the project write up please uncomment the approperate parts in the main fuction. 
 

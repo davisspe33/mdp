@@ -39,3 +39,17 @@ def plotmodel(x,y):
     plt.legend(loc="best")
     plt.show()
 main()
+
+
+
+def plotmodelLearn(x,y):
+    train_scores, test_scores = learning_curve(GradientBoostingClassifier(), x, y)
+    train_scores_mean = np.mean(train_scores, axis=1)
+    test_scores_mean = np.mean(test_scores, axis=1)
+    lw = 2
+    plt.plot(train_scores_mean, label="Training score",color="darkorange", lw=lw)
+    plt.plot(test_scores_mean, label="Cross-validation score",color="navy", lw=lw)
+    plt.xlabel('number of neighbors')
+    plt.ylabel('R squared accuracy')
+    plt.legend(loc="best")
+    plt.show()
