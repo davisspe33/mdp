@@ -1,5 +1,8 @@
-Spencer Davis sdavis342
+Spencer Davis 
+sdavis342
 Supprovised learning Project 1 Machine learning CS7641
+
+Code can be found here: https://github.com/davisspe33/P1-SupervisedLearning
 
 This is a Python3 Project 
 
@@ -18,3 +21,5 @@ To run the algortithms on the BreastCancer data run the follwoing command
 
 To get the plots of the validation and learning curves used in the project write up please uncomment the approperate parts in the main fuction. 
 
+All of the code either came from the sklearn docs(https://scikit-learn.org/stable/modules/classes.html) or was written by me, Spencer Davis
+The datasets used in this project can be found in the 2 csv's. 
