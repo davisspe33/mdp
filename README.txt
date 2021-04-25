@@ -2,7 +2,7 @@ Spencer Davis
 sdavis342
 Markov Decision Process Project 4 Machine learning CS7641
 
-Code can be found here: https://github.com/davisspe33/P1-SupervisedLearning
+Code can be found here: https://github.com/davisspe33/mdp
 
 This is a Python3 Project 
 
