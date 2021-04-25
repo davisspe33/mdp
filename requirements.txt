@@ -3,3 +3,6 @@ numpy
 pandas
 csv
 matplotlib
+pytest-runner
+mdptoolbox-hiive
+datatime
